@@ -1,8 +1,8 @@
-import { db } from '../db.js';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+const { db } = require('../db');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
-export const register = (req, res) => {
+const register = (req, res) => {
   const q = 'SELECT * FROM users WHERE email = ? OR username = ?';
   db.query(q, [req.body.email, req.body.username], (err, data) => {
     if (err) return res.status(500).json(err);
@@ -20,7 +20,7 @@ export const register = (req, res) => {
     });
   });
 };
-export const login = (req, res) => {
+const login = (req, res) => {
   // CHECK USER EXISTED
 
   const q = 'SELECT * FROM users WHERE username = ?';
@@ -51,7 +51,7 @@ export const login = (req, res) => {
   });
 };
 
-export const logout = (req, res) => {
+const logout = (req, res) => {
   res
     .clearCookie('access_token', {
       sameSite: 'none',
@@ -59,4 +59,10 @@ export const logout = (req, res) => {
     })
     .status(200)
     .json('User has been logged out.');
+};
+
+module.exports = {
+  login,
+  register,
+  logout,
 };

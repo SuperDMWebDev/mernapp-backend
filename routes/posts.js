@@ -1,12 +1,11 @@
-import express from 'express';
-import {
+const express = require('express');
+const {
   addPost,
   deletePost,
   getPost,
   getPosts,
   updatePost,
-} from '../controller/post.js';
-
+} = require('../controller/post');
 const router = express.Router();
 
 router.get('/', getPosts);
@@ -15,4 +14,4 @@ router.post('/', addPost);
 router.delete('/:id', deletePost);
 router.put('/:id', updatePost);
 
-export default router;
+module.exports = router;

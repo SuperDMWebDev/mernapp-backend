@@ -1,10 +1,10 @@
-import express from 'express';
-import cookieParser from 'cookie-parser';
-import multer from 'multer';
-import authRoutes from './routes/auth.js';
-import postsRoutes from './routes/posts.js';
-import cors from 'cors';
-import { addHeader } from './middleware/middleware.js';
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const multer = require('multer');
+const authRoutes = require('./routes/auth');
+const postsRoutes = require('./routes/posts');
+const cors = require('cors');
+const { addHeader } = require('./middleware/middleware');
 const app = express();
 app.use(cors());
 app.use(express.json());

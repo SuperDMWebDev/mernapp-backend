@@ -1,4 +1,4 @@
-export const addHeader = (req, res, next) => {
+const addHeader = (req, res, next) => {
   // Website you wish to allow to connect
   res.setHeader('Access-Control-Allow-Origin', '*');
   // Set to true if you need the website to include cookies in the requests sent
@@ -7,3 +7,5 @@ export const addHeader = (req, res, next) => {
 
   next();
 };
+
+module.exports = { addHeader };

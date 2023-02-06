@@ -1,7 +1,6 @@
-import { db } from '../db.js';
-import jwt from 'jsonwebtoken';
-
-export const getPosts = (req, res) => {
+const jwt = require('jsonwebtoken');
+const { db } = require('../db');
+const getPosts = (req, res) => {
   const q = req.query.cat
     ? 'SELECT * FROM posts WHERE cat=?'
     : 'SELECT * FROM posts';
@@ -13,7 +12,7 @@ export const getPosts = (req, res) => {
   });
 };
 
-export const getPost = (req, res) => {
+const getPost = (req, res) => {
   const q =
     'SELECT p.id, `username`, `title`, `desc`, p.img, u.img AS userImg, `cat`,`date` FROM users u JOIN posts p ON u.id = p.userid WHERE p.id = ? ';
 
@@ -24,7 +23,7 @@ export const getPost = (req, res) => {
   });
 };
 
-export const addPost = (req, res) => {
+const addPost = (req, res) => {
   const token = req.headers.access_token;
   if (!token) return res.status(401).json('Not authenticated!');
 
@@ -50,7 +49,7 @@ export const addPost = (req, res) => {
   });
 };
 
-export const deletePost = (req, res) => {
+const deletePost = (req, res) => {
   const token = req.headers.access_token;
   if (!token) return res.status(401).json('Not authenticated!');
 
@@ -68,7 +67,7 @@ export const deletePost = (req, res) => {
   });
 };
 
-export const updatePost = (req, res) => {
+const updatePost = (req, res) => {
   const token = req.headers.access_token;
   if (!token) return res.status(401).json('Not authenticated!');
 
@@ -86,4 +85,11 @@ export const updatePost = (req, res) => {
       return res.json('Post has been updated.');
     });
   });
+};
+module.exports = {
+  addPost,
+  getPost,
+  getPosts,
+  updatePost,
+  deletePost,
 };
